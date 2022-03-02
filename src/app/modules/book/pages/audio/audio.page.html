@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ audio.title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row class="player">
+      <ion-col>
+        <img [src]="book.thumbnail" class="thumbnail" alt="book">
+
+        <ion-row>
+          <ion-col size="10">
+            <h4 class="ion-text-center">{{ audio.title }}</h4>
+          </ion-col>
+        </ion-row>
+
+        <ion-item lines="none">
+          <ion-range min="0" max="{{duration}}" [value]="currentPosition" color="dark">
+            <ion-label slot="start">{{ hhmmss }}</ion-label>
+            <ion-label slot="end">{{ audioDuration }}</ion-label>
+          </ion-range>
+        </ion-item>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="3">
+            <ion-button (click)="fastBackward()" fill="clear" color="dark">
+              <ion-icon name="play-back-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="3" class="ion-text-center ion-no-ripple">
+            <ion-button fill="clear" color="dark" (click)="play()">
+              <ion-icon slot="icon-only" name="{{ isPlaying ? 'pause-circle-outline' : 'play-circle-outline'}}"></ion-icon>
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="3" class="ion-text-end">
+            <ion-button (click)="fastForward()" fill="clear" color="dark">
+              <ion-icon name="play-forward-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-item lines="none">
+          <ion-range (ionChange)="changeVolume($event)" min="0" max="1.0" step="0.1" value="0.70" color="dark">
+            <ion-icon slot="start" name="volume-low-outline"></ion-icon>
+            <ion-icon slot="end" name="volume-high-outline"></ion-icon>
+          </ion-range>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

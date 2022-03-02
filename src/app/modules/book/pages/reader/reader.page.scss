@@ -1,0 +1,116 @@
+ion-content {
+  --padding-start: 24px;
+  --padding-end: 24px;
+  --padding-top: 24px;
+  --padding-bottom: 24px;
+
+  &.theme-white {
+    --background: #FFFFFF;
+    --color: #111724;
+  }
+  &.theme-paper {
+    --background: #F5E9D3;
+    --color: #0d0d0d;
+  }
+  &.theme-grey {
+    --background: #333333;
+    --color: #828282;
+  }
+  &.theme-dark {
+    --background: #121212;
+    --color: #EDEEF2;
+  }
+}
+
+.font-contemporary {
+  font-family: "Scala", sans-serif;
+
+  &.line-space-small {
+    line-height: 1.5;
+  }
+  &.line-space-medium {
+    line-height: 1.7;
+  }
+  &.line-space-large {
+    line-height: 1.9;
+  }
+}
+.font-geometric {
+  font-family: "Din Offc Pro", sans-serif;
+
+  &.line-space-small {
+    line-height: 1.5;
+  }
+  &.line-space-medium {
+    line-height: 1.7;
+  }
+  &.line-space-large {
+    line-height: 1.9;
+  }
+}
+.font-modern {
+  font-family: "Harriet Text", sans-serif;
+
+  &.line-space-small {
+    line-height: 1.5;
+  }
+  &.line-space-medium {
+    line-height: 1.7;
+  }
+  &.line-space-large {
+    line-height: 1.9;
+  }
+
+}
+.font-postmodern {
+  font-family: "Scala Sans", sans-serif;
+
+  &.line-space-small {
+    line-height: 1.5;
+  }
+  &.line-space-medium {
+    line-height: 1.7;
+  }
+  &.line-space-large {
+    line-height: 1.9;
+  }
+
+}
+.font-slab {
+  font-family: "Tisa Offc Pro", sans-serif;
+
+  &.line-space-small {
+    line-height: 1.5;
+  }
+  &.line-space-medium {
+    line-height: 1.7;
+  }
+  &.line-space-large {
+    line-height: 1.9;
+  }
+}
+.font-vintage {
+  font-family: "Vollkorn", "Livory", sans-serif;
+
+  &.line-space-small {
+    line-height: 1.5;
+  }
+  &.line-space-medium {
+    line-height: 1.7;
+  }
+  &.line-space-large {
+    line-height: 1.9;
+  }
+}
+
+.font-regular {
+  &.line-space-small {
+    line-height: 1.5;
+  }
+  &.line-space-medium {
+    line-height: 1.7;
+  }
+  &.line-space-large {
+    line-height: 1.9;
+  }
+}

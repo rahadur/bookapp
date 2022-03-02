@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      {{ book.title }}
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="selectedSegment">
+      <ion-segment-button value="reading" layout="icon-start">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-label>Text</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="audio" layout="icon-start">
+        <ion-icon name="headset-outline"></ion-icon>
+        <ion-label>Audio</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="!loading else skeleton">
+    <ion-list *ngIf="selectedSegment === 'reading'" lines="full">
+      <ng-container *ngFor="let chapter of chapters">
+        <ion-item *ngIf="!chapter.sectionable" (click)="openChapter(chapter)">
+          <ion-icon  slot="start" name="reader-outline" size="large"></ion-icon>
+          <ion-label class="ion-text-wrap">{{ chapter.title }}</ion-label>
+        </ion-item>
+
+        <ng-container *ngIf="chapter.sectionable">
+          <app-accordion [chapter]="chapter" (onClick)="readSection($event, chapter)"></app-accordion>
+        </ng-container>
+      </ng-container>
+    </ion-list>
+
+    <ion-list *ngIf="selectedSegment === 'audio'" lines="full">
+      <ion-item *ngFor="let audio of audios" (click)="listenChapter(audio)">
+        <ion-icon   slot="start" name="play-circle-outline" size="large"></ion-icon>
+        <ion-label class="ion-text-wrap">{{ audio.title }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ion-content>
+
+<ng-template #skeleton>
+  <ion-list>
+    <ion-item *ngFor="let item of skeletons">
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ng-template>

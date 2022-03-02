@@ -1,0 +1,16 @@
+::ng-deep{
+  .title {
+    width: 100%;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 0 16px;
+    margin: 20px 0;
+  }
+}
+
+.scrollable {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  overflow-wrap: break-word;
+}

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ book.title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full">
+    <ng-container *ngFor="let chapter of chapters">
+      <ion-item *ngIf="!chapter.sectionable" (click)="readChapter(chapter)" >
+        <ion-icon slot="start" name="reader-outline"></ion-icon>
+        <ion-label  class="ion-text-wrap">{{ chapter.title }}</ion-label>
+      </ion-item>
+
+      <ng-container *ngIf="chapter.sectionable">
+        <app-accordion [chapter]="chapter" (onClick)="readSection($event, chapter)"></app-accordion>
+      </ng-container>
+    </ng-container>
+  </ion-list>
+</ion-content>

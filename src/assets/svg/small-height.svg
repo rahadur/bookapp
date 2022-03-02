@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <title>small-height</title>
+    <g id="small-height" stroke="currentColor" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <line x1="80" y1="174.5" x2="432" y2="174.5" id="Path" stroke="currentColor" stroke-width="32"></line>
+        <line x1="80" y1="256.5" x2="432" y2="256.5" id="Path" stroke="currentColor" stroke-width="32"></line>
+        <line x1="80" y1="338.5" x2="432" y2="338.5" id="Path" stroke="currentColor" stroke-width="32"></line>
+    </g>
+</svg>

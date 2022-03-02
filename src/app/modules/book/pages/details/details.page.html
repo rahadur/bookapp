@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      {{ book?.title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-text-center">
+        <ion-img [src]="book?.thumbnail"></ion-img>
+        <h6>{{ book?.title }}</h6>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-row class="ion-justify-content-center">
+              <ion-col class="ion-text-center">
+                <h3>Genre</h3>
+                <p>{{ book?.genre.title }}</p>
+              </ion-col>
+
+              <ion-col class="ion-text-center">
+                <p>Audible</p>
+                <p>{{ book?.audible ? 'Yes' : 'No' }}</p>
+              </ion-col>
+
+              <ion-col class="ion-text-center">
+                <p>Downloadable</p>
+                <p>{{ book?.downloadable ? 'Yes' : 'No' }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <!--<app-description [description]="book?.description"></app-description>-->
+        <div [innerHTML]="book?.description"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-toolbar color="white">
+    <ion-button (click)="readBook()" expand="full" color="dark">
+      Read Book
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

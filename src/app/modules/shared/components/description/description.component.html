@@ -1,0 +1,19 @@
+<ng-container *ngIf="description?.length > 275; else buttonLess">
+  <div
+    [class.expand-less]="readMoreText"
+    [innerHtml]="description">
+  </div>
+
+  <div class="read-more" (click)="readMore()">
+    <ng-container *ngIf="readMoreText">
+      Read More <ion-icon name="chevron-down-outline"></ion-icon>
+    </ng-container>
+    <ng-container *ngIf="!readMoreText">
+      Read Less <ion-icon name="chevron-up-outline"></ion-icon>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #buttonLess>
+  <div [innerHtml]="description"></div>
+</ng-template>

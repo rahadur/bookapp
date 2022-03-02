@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{content.title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openReaderSetting($event)">
+        <ion-icon slot="icon-only" name="text-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [ngClass]="{'theme-white': settings.theme === 'white',
+                        'theme-paper': settings.theme === 'paper',
+                        'theme-grey': settings.theme === 'grey',
+                        'theme-dark': settings.theme === 'dark'}">
+
+  <div [ngClass]="{ 'font-regular': settings.font === '',
+                    'font-contemporary': settings.font === 'contemporary',
+                    'font-geometric': settings.font === 'geometric',
+                    'font-modern': settings.font === 'modern',
+                    'font-postmodern': settings.font === 'postmodern',
+                    'font-slab': settings.font === 'slab',
+                    'font-vintage': settings.font === 'vintage',
+                    'line-space-small': settings.lineSpace === 'small',
+                    'line-space-medium': settings.lineSpace === 'medium',
+                    'line-space-large': settings.lineSpace === 'large',
+                    'ion-text-justify': settings.alignment === 'justify',
+                    'ion-text-left': settings.alignment === 'left'}"
+
+       [ngStyle]="{ 'font-size': settings.fontSize + 'px'}"
+       [innerHTML]="content.content"></div>
+</ion-content>

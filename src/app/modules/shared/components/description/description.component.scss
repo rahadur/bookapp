@@ -1,0 +1,36 @@
+
+.expand-less {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 128px;
+  min-height: auto;
+
+  &::after {
+    content: "...";
+    position: absolute;
+    bottom: 2px;
+    height: auto;
+    background: #fff;
+    width: 48px;
+    right: -1px;
+    padding: 0 0 0 9px;
+    color: #013240;
+    font-size: 23px;
+    line-height: 20px;
+  }
+
+}
+
+.read-more {
+  color: #475294;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 22px;
+  text-align: center;
+}
+
+ion-icon {
+  margin: -2px;
+  font-size: 18px;
+}

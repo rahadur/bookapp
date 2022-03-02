@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <title>Large Line Height</title>
+    <g id="large-height" stroke="currentColor" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <line x1="80" y1="116.5" x2="432" y2="116.5" id="Path" stroke="currentColor" stroke-width="32"></line>
+        <line x1="80" y1="256.5" x2="432" y2="256.5" id="Path" stroke="currentColor" stroke-width="32"></line>
+        <line x1="80" y1="396.5" x2="432" y2="396.5" id="Path" stroke="currentColor" stroke-width="32"></line>
+    </g>
+</svg>

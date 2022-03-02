@@ -1,0 +1,120 @@
+<ion-content [ngClass]="{'theme-white': settings.theme === 'white',
+                        'theme-paper': settings.theme === 'paper',
+                        'theme-grey': settings.theme === 'grey',
+                        'theme-dark': settings.theme === 'dark'}">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>Font</ion-label>
+      </ion-col>
+      <ion-col size="12">
+        <ion-select (ionChange)="selectFont($event)" [interfaceOptions]="customPopoverOptions" [value]="settings.font" interface="popover">
+          <ion-select-option value="contemporary">Contemporary</ion-select-option>
+          <ion-select-option value="geometric">Geometric</ion-select-option>
+          <ion-select-option value="modern">Modern</ion-select-option>
+          <ion-select-option value="postmodern">Postmodern</ion-select-option>
+          <ion-select-option value="slab">Slab</ion-select-option>
+          <ion-select-option value="vintage">Vintage</ion-select-option>
+          <ion-select-option value="">Regular</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="5">
+        <ion-label>Alignment</ion-label>
+        <ion-buttons class="ion-padding-vertical">
+          <ion-button (click)="changeAlign('justify')" fill="outline" color="{{ settings.alignment === 'justify' ? 'primary' : ''}}">
+            <ion-icon name="reorder-four-outline"></ion-icon>
+          </ion-button>
+          <ion-button (click)="changeAlign('left')" fill="outline" color="{{ settings.alignment === 'left' ? 'primary' : ''}}">
+            <ion-icon src="assets/svg/align-left.svg"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+
+      <ion-col size="7">
+        <ion-label >Line Spacing</ion-label>
+        <ion-buttons class="ion-padding-vertical">
+          <ion-button (click)="changeLineSpace('small')" fill="outline" color="{{ settings.lineSpace === 'small' ? 'primary' : ''}}">
+            <ion-icon src="assets/svg/small-height.svg"></ion-icon>
+          </ion-button>
+          <ion-button (click)="changeLineSpace('medium')" fill="outline" color="{{ settings.lineSpace === 'medium' ? 'primary' : ''}}">
+            <ion-icon src="assets/svg/medium-height.svg"></ion-icon>
+          </ion-button>
+          <ion-button (click)="changeLineSpace('large')" fill="outline" color="{{ settings.lineSpace === 'large' ? 'primary' : ''}}">
+            <ion-icon src="assets/svg/large-height.svg"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="5">
+        <ion-label>Scroll</ion-label>
+        <ion-buttons class="ion-padding-vertical">
+          <ion-button (click)="selectScrollDirection('leftRight')" fill="outline" color="{{ settings.scrollDirection === 'leftRight' ? 'primary' : ''}}">
+            <ion-icon name="log-out-outline"></ion-icon>
+          </ion-button>
+          <ion-button (click)="selectScrollDirection('topDown')" fill="outline" color="{{ settings.scrollDirection === 'topDown' ? 'primary' : ''}}">
+            <ion-icon name="download-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+
+      <ion-col size="7">
+        <ion-label>Font Size</ion-label>
+        <ion-range (ionChange)="changeFont($event)" min="10" max="30" [value]="settings.fontSize" color="primary">
+          <ion-icon slot="start" size="small" name="text-outline"></ion-icon>
+          <ion-icon slot="end" name="text-outline"></ion-icon>
+        </ion-range>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>Theme</ion-label>
+      </ion-col>
+      <ion-col size="3">
+        <div (click)="selectTheme('white')" class="color white" [ngClass]="{ 'active': settings.theme === 'white'}">
+          Aa
+        </div>
+      </ion-col>
+      <ion-col size="3">
+        <div (click)="selectTheme('paper')" class="color paper" [ngClass]="{ 'active': settings.theme === 'paper'}">
+          Aa
+        </div>
+      </ion-col>
+      <ion-col size="3">
+        <div (click)="selectTheme('grey')" class="color grey" [ngClass]="{ 'active': settings.theme === 'grey'}">
+          Aa
+        </div>
+      </ion-col>
+      <ion-col size="3">
+        <div (click)="selectTheme('dark')" class="color dark" [ngClass]="{ 'active': settings.theme === 'dark'}">
+          Aa
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>Brightness</ion-label>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button (click)="autoBrightness()" size="small" expand="block" fill="{{ settings.autoBright ? 'outline' : 'clear'}}">
+          Auto
+        </ion-button>
+      </ion-col>
+      <ion-col size="9">
+        <ion-range (ionChange)="changeBrightness($event)" [value]="settings.brightness"  class="brightness">
+          <ion-icon slot="start" size="small" name="sunny"></ion-icon>
+          <ion-icon slot="end" name="sunny"></ion-icon>
+        </ion-range>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
