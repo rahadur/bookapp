@@ -1,4 +1,4 @@
-export type Font = 'contemporary' | 'geometric' | 'modern' | 'postmodern' | 'slab' | 'vintage';
+export type Font = 'contemporary' | 'geometric' | 'modern' | 'postmodern' | 'slab' | 'vintage' | 'none';
 export type Alignment = 'justify' | 'left';
 export type LineSpace = 'small' | 'medium' | 'large';
 export type ScrollDirection = 'leftRight' | 'topDown';
