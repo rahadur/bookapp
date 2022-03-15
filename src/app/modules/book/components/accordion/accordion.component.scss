@@ -2,30 +2,41 @@ ion-select-option {
   border: none;
 }
 
-ion-item {
+ion-item.chapter {
+  --background: #fff;
+  --min-height: 70px;
+  margin: 10px 14px 0;
+  border: 2px solid #0d0d0d;
+  border-radius: 12px;
+
   ion-icon {
     font-size: 26px;
-    color: var(--ion-color-dark);
-  }
-
-  ion-icon.section-icon {
-    font-size: 26px;
-    color: var(--ion-color-medium);
+    color: var(--ion-color-primary);
   }
 
   ion-label {
-    font-family: "Scala", sans-serif;
+    font-family: "Scala Sans", "Roboto", sans-serif;
+    font-size: 18px;
     font-weight: bold;
   }
 
-  ion-label.section-label {
-    font-family: "Scala", sans-serif;
-    font-weight: normal;
-  }
 }
 
-ion-item.chapter {
-  --min-height: 60px;
+ion-item.section {
+  --background: #fff;
+  --min-height: 70px;
+  margin: 0 16px;
+
+  ion-icon.section-icon {
+    font-size: 26px;
+    color: var(--ion-color-success);
+  }
+
+  ion-label.section-label {
+    font-family: "Scala Sans", "Roboto", sans-serif;
+    font-weight: bold;
+  }
+
 }
 
 /* Following classes display/hide the 'menu'

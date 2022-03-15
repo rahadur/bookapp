@@ -14,7 +14,10 @@ import {Content} from '@app/modules/book/models/content';
 })
 export class TextbookPage implements OnInit {
 
-  book: Book;
+  loading = false;
+  skeletons  =  Array(10).fill(1);
+
+  book: Book = null;
   chapters: Chapter[];
 
   constructor(
@@ -28,9 +31,7 @@ export class TextbookPage implements OnInit {
   ngOnInit() {
     const { bookId } = this.route.snapshot.params;
     this.book = this.navigation.book;
-    this.bookApi.fetchChapters(bookId).subscribe((chapters) => {
-      this.chapters = chapters;
-    });
+    this.fetchData(bookId);
   }
 
   async ionViewDidEnter(): Promise<void> {
@@ -45,6 +46,23 @@ export class TextbookPage implements OnInit {
   readSection(section: Content, chapter: Chapter): void {
     this.navigation.content = section;
     this.router.navigate([`/book/reader/${chapter.id}`]);
+  }
+
+  private fetchData(bookId): void {
+    this.loading = true;
+    if(!this.navigation.book) {
+      this.bookApi.fetchBook(bookId).subscribe((book: Book) => {
+        this.book = book;
+        this.navigation.book = book;
+      });
+    } else {
+      this.book = this.navigation.book;
+    }
+
+    this.bookApi.fetchChapters(bookId).subscribe((chapters) => {
+      this.loading = false;
+      this.chapters = chapters;
+    });
   }
 
 

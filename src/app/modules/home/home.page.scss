@@ -1,33 +1,40 @@
+ion-header {
+  color: #0d0d0d;
+  ion-toolbar {
+    color: #0d0d0d;
+    ion-title {
+      font-weight: bold;
+    }
+    ion-button {
+      color: #0d0d0d;
+    }
+  }
+}
+
 ion-content {
   ion-grid {
     ion-row {
-      ion-col {
-
-        ion-card {
-          height: 270px;
-          box-shadow: none;
-          border: 1px solid #cccccc;
-          border-radius: 12px;
+      ion-col.primary-book-title {
+        h3 {
+          margin: 8px 0;
+        }
+        h5 {
           margin: 0;
-
-          ion-img::part(image) {
-            height: 200px;
-            object-fit: cover;
-            object-position: center;
-          }
-
-          ion-card-content {
-            padding: 4px 4px;
-
-            h4 {
-              font-size: 16px;
-              font-weight: normal;
-              color: #333;
-            }
+          color: #1E7A85;
+          span {
+            color: grey;
           }
         }
-
+      }
+      ion-col.section-header {
+        margin-top: 10px;
+        border-bottom: 1px solid #cccccc;
+        h3 {
+          margin: 10px 0 0;
+          font-weight: bold;
+        }
       }
     }
+
   }
 }

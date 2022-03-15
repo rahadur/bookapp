@@ -11,48 +11,54 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row class="ion-justify-content-center">
+    <ion-row>
       <ion-col class="ion-text-center">
         <ion-img [src]="book?.thumbnail"></ion-img>
-        <h6>{{ book?.title }}</h6>
+        <h6 class="book-title" >{{ book?.title }}</h6>
+        <h6 class="book-author" *ngIf="book.author" >
+          <span>by</span>
+          {{ book?.author.name }}
+        </h6>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <!--<ion-row>
       <ion-col>
         <ion-card>
           <ion-card-content>
             <ion-row class="ion-justify-content-center">
               <ion-col class="ion-text-center">
-                <h3>Genre</h3>
-                <p>{{ book?.genre.title }}</p>
+                <h5 class="option">Genre</h5>
+                <p class="value">{{ book?.genre.title }}</p>
               </ion-col>
 
               <ion-col class="ion-text-center">
-                <p>Audible</p>
-                <p>{{ book?.audible ? 'Yes' : 'No' }}</p>
+                <h5 class="option">Author</h5>
+                <p class="value">{{ book?.downloadable ? 'Yes' : 'No' }}</p>
               </ion-col>
 
               <ion-col class="ion-text-center">
-                <p>Downloadable</p>
-                <p>{{ book?.downloadable ? 'Yes' : 'No' }}</p>
+                <h5 class="option">Audible</h5>
+                <p class="value">{{ book?.audible ? 'Yes' : 'No' }}</p>
               </ion-col>
+
+
             </ion-row>
           </ion-card-content>
         </ion-card>
       </ion-col>
-    </ion-row>
-    <ion-row>
+    </ion-row>-->
+    <ion-row class="ion-padding">
       <ion-col>
         <!--<app-description [description]="book?.description"></app-description>-->
-        <div [innerHTML]="book?.description"></div>
+        <div class="description" [innerHTML]="html"></div>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
 <ion-footer class="ion-padding">
-  <ion-toolbar color="white">
-    <ion-button (click)="readBook()" expand="full" color="dark">
+  <ion-toolbar>
+    <ion-button expand="block" mode="ios" (click)="readBook()">
       Read Book
     </ion-button>
   </ion-toolbar>

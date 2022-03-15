@@ -1,7 +1,69 @@
+ion-header {
+  color: #0d0d0d;
+  ion-toolbar {
+    color: #0d0d0d;
+    ion-button {
+      color: #0d0d0d;
+    }
+  }
+}
 
-ion-img::part(image) {
-  width: auto;
-  height: 200px;
-  display: block;
-  margin: 0 auto;
+ion-content {
+  ion-img::part(image) {
+    width: calc(100% - 50%);
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  h6.book-title {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 27.8px;
+    color: var(--ion-color-dark);
+  }
+
+  h6.book-author {
+    color: #1E7A85;
+    margin: 0;
+    span {
+      color: #cccccc;
+    }
+  }
+
+  ion-card {
+    border: 2px solid #0d0d0d;
+    box-shadow: none;
+
+    ion-card-content {
+      h5.option {
+        color: #0d0d0d;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      p.value {
+        color: #6c758d;
+        font-size: 15px;
+        font-weight: normal;
+        margin-top: 8px;
+      }
+    }
+  }
+
+  div.description {
+    font-family: "Scala", sans-serif;
+    font-size: 18px;
+    line-height: 26px;
+    color: #515e70;
+  }
+
+  ion-footer {
+    ion-toolbar {
+      ion-button {
+        --padding-top: 200px;
+        padding: 200px !important;
+      }
+    }
+  }
+
 }

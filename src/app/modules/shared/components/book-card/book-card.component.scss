@@ -1,26 +1,27 @@
 ion-card {
+  height: 210px;
   box-shadow: none;
-  margin: 10px 4px;
+  margin: 16px 0 0;
+  overflow: hidden;
 
-  ion-img {
-    height: 150px;
-    &::part(image) {
-      object-fit: cover;
-      object-position: top;
-      border-radius: 4px;
-    }
+  ion-img::part(image) {
+    height: 165px;
+    object-fit: cover;
+    object-position: center;
   }
 
   ion-card-content {
-    padding: 4px 0;
-    .card-title {
-      max-height: 34px;
-      overflow-y: hidden;
-      .title {
-        color: #333333;
-        font-weight: 500;
-        font-size: 12px;
-      }
+    padding: 8px 0;
+
+    h4.title {
+      font-size: 0.813rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    p.author {
+      font-size: 0.813rem;
+      color: #8d8d8d;
     }
   }
 }

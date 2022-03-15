@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ActionSheetController, AlertController} from '@ionic/angular';
+import {ActionSheetController, PopoverController} from '@ionic/angular';
 import {Capacitor} from '@capacitor/core';
 
 
@@ -8,8 +8,9 @@ import {BookService} from '@core/services/book.service';
 import {NavigationService} from '@core/services/navigation.service';
 import {AdService} from '@core/services/ad.service';
 
-import {StorageService} from '@core/services/storage.service';
+import {StorageKey, StorageService} from '@core/services/storage.service';
 import {Book} from '@app/modules/book/models/book';
+import {MoreMenuComponent} from '@core/components/more-menu/more-menu.component';
 
 @Component({
   selector: 'app-home',
@@ -19,12 +20,14 @@ import {Book} from '@app/modules/book/models/book';
 export class HomePage implements OnInit {
 
   loading = true;
+  primaryBook: Book;
+  relatedBooks: Book[];
   books: Book[];
   selectedBook: Book;
 
   constructor(
     private router: Router,
-    private alertCtrl: AlertController,
+    private popoverCtrl: PopoverController,
     private actionCtrl: ActionSheetController,
     private bookService: BookService,
     private navigation: NavigationService,
@@ -33,11 +36,7 @@ export class HomePage implements OnInit {
   }
 
   async ngOnInit() {
-    this.bookService.fetchBooks().subscribe((books) => {
-      this.loading = false;
-      this.books = books;
-    });
-
+    await this.fetchBooks();
   }
 
   doRefresh(event) {
@@ -51,6 +50,18 @@ export class HomePage implements OnInit {
   async navigateTo(book: Book): Promise<void> {
     this.navigation.book = book;
     await this.router.navigate([`book/details/${book.id}`]);
+  }
+
+  async showMoreMenu(ev: any): Promise<void> {
+    console.log('Show More');
+    const popover = await this.popoverCtrl.create({
+      component: MoreMenuComponent,
+      cssClass: 'more-menu-popover popover-content',
+      event: ev,
+      translucent: true,
+      showBackdrop: false
+    });
+    await popover.present();
   }
 
   async presentActionSheet(): Promise<void> {
@@ -72,6 +83,27 @@ export class HomePage implements OnInit {
     });
 
     await actionSheet.present();
+  }
+
+  private async fetchBooks(): Promise<void> {
+    const appInfo = JSON.parse(localStorage.getItem('APP_INFO'));
+
+    const ids = appInfo.books.map((book) => book.book );
+    const relatedBookIds = appInfo.related_books.map((book) => book.book );
+
+    this.bookService.fetchBook(appInfo.book).subscribe((book: Book) => {
+      this.primaryBook = book;
+    });
+
+    this.bookService.fetchBooksIds(relatedBookIds).subscribe((books) => {
+      this.loading = false;
+      this.relatedBooks = books;
+    });
+
+    this.bookService.fetchBooksIds(ids).subscribe((books) => {
+      this.loading = false;
+      this.books = books;
+    });
   }
 
 }

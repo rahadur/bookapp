@@ -1,14 +1,41 @@
+ion-header {
+  color: #0d0d0d;
+  ion-toolbar {
+    color: #0d0d0d;
+    ion-button {
+      color: #0d0d0d;
+    }
+  }
+}
+
 ion-content {
+  /* app background */
+  --ion-background-color: #F7F7F7;
+
+  div.title {
+    h3 {
+      font-family: "Scala Sans", "Roboto", sans-serif;
+      font-weight: 700;
+      margin: 25px 16px 0;
+    }
+  }
+
   ion-item {
-    --min-height: 60px;
+    --background: #fff;
+    --min-height: 70px;
+    margin: 10px 16px;
+    border: 2px solid #0d0d0d;
+    border-radius: 12px;
 
     ion-icon {
-      font-size: 28px;
-      color: var(--ion-color-dark);
+      font-size: 26px;
+      color: var(--ion-color-primary);
     }
 
     ion-label {
+      font-family: "Scala Sans", "Roboto", sans-serif;
       font-weight: bold;
+      text-transform: uppercase;
     }
   }
 }

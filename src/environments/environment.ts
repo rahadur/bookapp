@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  appId: 'io.ionic.starter',
+  appId: 'abc.book1.prayer',
   apiUrl: 'https://graph.goodbook.xyz',
+  privacyUrl: 'https://google.com',
+  reportUrl: 'https://google.com',
   category: 1, // Finance
   admob: {
     android: {

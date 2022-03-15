@@ -1,18 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Book
+      Prayer Book
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="presentActionSheet()">
-        <ion-icon slot="icon-only" name="ellipsis-vertical-circle-outline"></ion-icon>
+      <ion-button (click)="showMoreMenu($event)">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" >
+  <ion-refresher
+    (ionRefresh)="doRefresh($event)"
+    slot="fixed" pullFactor="0.5"
+    pullMin="100" pullMax="200" >
     <ion-refresher-content
       pullingIcon="chevron-down-circle-outline"
       pullingText="Pull to refresh"
@@ -20,19 +23,69 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
+
   <ion-grid>
+    <!--<ion-row *ngIf="!loading">
+      <ion-col size="4">
+        <ion-img [src]="primaryBook.thumbnail"></ion-img>
+      </ion-col>
+      <ion-col size="8">
+        <h3>{{ primaryBook.title }}</h3>
+        <ion-text color="primary">
+          <h5> by {{ primaryBook.author.name }}</h5>
+        </ion-text>
+      </ion-col>
+    </ion-row>-->
+
+    <ion-row *ngIf="!loading" (click)="navigateTo(primaryBook)">
+      <ion-col size="6" offset="3">
+        <ion-img [src]="primaryBook.thumbnail"></ion-img>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center primary-book-title">
+        <h3>{{ primaryBook.title }}</h3>
+        <h5> <span>by</span> {{ primaryBook.author.name }}</h5>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="section-header" size="6">
+        <h3>Related Books</h3>
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ng-container *ngIf="!loading">
-        <ion-col *ngFor="let book of books" size="6">
-          <ion-card (click)="navigateTo(book)">
-            <ion-img [src]="book.thumbnail"></ion-img>
-            <ion-card-content>
-              <h4>{{ book.title | slice:0:50 }}</h4>
-            </ion-card-content>
-          </ion-card>
+        <ion-col
+           *ngFor="let book of relatedBooks"
+           size="4" size-sm="3"
+           size-md="2" size-lg="1" >
+          <app-book-card
+            [book]="book"
+            (click)="navigateTo(book)">
+          </app-book-card>
         </ion-col>
       </ng-container>
+    </ion-row>
 
+    <ion-row>
+      <ion-col size="6" class="section-header">
+        <h3 >More Books</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ng-container *ngIf="!loading">
+        <ion-col
+          *ngFor="let book of books"
+          size="4" size-sm="3"
+          size-md="2" size-lg="1" >
+          <app-book-card
+            [book]="book"
+            (click)="navigateTo(book)">
+          </app-book-card>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+
+    <ion-row>
       <ng-container *ngIf="loading">
         <ion-col size="6">
           <ion-skeleton-text animated style="width: 100%; height: 244px;"></ion-skeleton-text>

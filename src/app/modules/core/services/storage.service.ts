@@ -3,8 +3,9 @@ import {Storage} from '@ionic/storage-angular';
 
 
 export enum StorageKey {
+  AppInfo = 'APP_INFO',
   UnlockedBooks = 'UNLOCKED_BOOKS',
-  InterstitialAdTimer = 'INTERSTITIAL_AD_TIMER'
+  InterstitialAdTimer = 'INTERSTITIAL_AD_TIMER',
 }
 
 @Injectable({

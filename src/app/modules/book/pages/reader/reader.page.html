@@ -6,7 +6,10 @@
     <ion-title>{{content.title}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="openReaderSetting($event)">
-        <ion-icon slot="icon-only" name="text-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="text"></ion-icon>
+      </ion-button>
+      <ion-button (click)="showMoreMenu($event)">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -31,5 +34,6 @@
                     'ion-text-left': settings.alignment === 'left'}"
 
        [ngStyle]="{ 'font-size': settings.fontSize + 'px'}"
-       [innerHTML]="content.content"></div>
+       class="custom-css"
+       [innerHTML]="html"></div>
 </ion-content>

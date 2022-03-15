@@ -7,6 +7,7 @@ import {RouterModule} from '@angular/router';
 import {BookCardComponent} from './components/book-card/book-card.component';
 import {HorizontalScrollComponent} from './components/horizontal-scroll/horizontal-scroll.component';
 import {DescriptionComponent} from './components/description/description.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 export const SHARED_MODULES = [
   IonicModule,
@@ -19,7 +20,8 @@ export const SHARED_MODULES = [
   declarations: [
     BookCardComponent,
     HorizontalScrollComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    TruncatePipe
   ],
   imports: [...SHARED_MODULES],
   exports: [

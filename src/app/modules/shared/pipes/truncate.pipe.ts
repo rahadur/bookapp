@@ -1,0 +1,15 @@
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'truncate'
+})
+export class TruncatePipe implements PipeTransform {
+
+  transform(value: string, args: any[]): string {
+    if(!value) {return '';}
+    const limit = args.length > 0 ? Number(args[0]) : 20;
+    const trail = args.length > 1 ? args[1] : '...';
+    return value.length > limit ? value.substring(0, limit-3) + trail : value;
+  }
+
+}

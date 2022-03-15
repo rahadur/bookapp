@@ -3,8 +3,8 @@
     <ion-buttons>
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">
-      {{ book.title }}
+    <ion-title *ngIf="book" class="ion-text-center">
+      {{ book?.title }}
     </ion-title>
   </ion-toolbar>
 
@@ -22,28 +22,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ng-container *ngIf="!loading else skeleton">
-    <ion-list *ngIf="selectedSegment === 'reading'" lines="full">
-      <ng-container *ngFor="let chapter of chapters">
-        <ion-item *ngIf="!chapter.sectionable" (click)="openChapter(chapter)">
-          <ion-icon  slot="start" name="reader-outline" size="large"></ion-icon>
-          <ion-label class="ion-text-wrap">{{ chapter.title }}</ion-label>
-        </ion-item>
-
-        <ng-container *ngIf="chapter.sectionable">
-          <app-accordion [chapter]="chapter" (onClick)="readSection($event, chapter)"></app-accordion>
-        </ng-container>
-      </ng-container>
-    </ion-list>
-
-    <ion-list *ngIf="selectedSegment === 'audio'" lines="full">
-      <ion-item *ngFor="let audio of audios" (click)="listenChapter(audio)">
-        <ion-icon   slot="start" name="play-circle-outline" size="large"></ion-icon>
-        <ion-label class="ion-text-wrap">{{ audio.title }}</ion-label>
+<ion-content *ngIf="!loading else skeleton">
+  <ion-list *ngIf="selectedSegment === 'reading'" lines="full">
+    <ng-container *ngFor="let chapter of chapters">
+      <ion-item *ngIf="!chapter.sectionable" (click)="openChapter(chapter)">
+        <ion-icon  slot="start" name="reader-outline" size="large"></ion-icon>
+        <ion-label class="ion-text-wrap">{{ chapter.title }}</ion-label>
       </ion-item>
-    </ion-list>
-  </ng-container>
+
+      <ng-container *ngIf="chapter.sectionable">
+        <app-accordion [chapter]="chapter" (onClick)="readSection($event, chapter)"></app-accordion>
+      </ng-container>
+    </ng-container>
+  </ion-list>
+
+  <ion-list *ngIf="selectedSegment === 'audio'" lines="full">
+    <ion-item *ngFor="let audio of audios" (click)="listenChapter(audio)">
+      <ion-icon   slot="start" name="play-circle-outline" size="large"></ion-icon>
+      <ion-label class="ion-text-wrap">{{ audio.title }}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
 
 <ng-template #skeleton>

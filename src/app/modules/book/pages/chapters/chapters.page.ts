@@ -7,6 +7,7 @@ import {BookService} from '@core/services/book.service';
 import {NavigationService} from '@core/services/navigation.service';
 import {AdService} from '@core/services/ad.service';
 import {Content} from '@app/modules/book/models/content';
+import {forkJoin} from 'rxjs';
 
 
 @Component({
@@ -34,18 +35,28 @@ export class ChaptersPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
     const { bookId } = this.route.snapshot.params;
-
     this.book = this.navigation.book;
-    this.bookApi.fetchChapters(bookId).subscribe((chapters) => {
+
+    const book = this.bookApi.fetchBook(bookId);
+    const chapters = this.bookApi.fetchChapters(bookId);
+    const audios = this.bookApi.fetchAudios(bookId);
+
+    forkJoin([book, chapters, audios]).subscribe((res) => {
+      this.loading = false;
+      this.book = res[0];
+      this.chapters = res[1];
+      this.audios = res[2];
+    });
+
+    /*this.bookApi.fetchChapters(bookId).subscribe((chapters) => {
       this.loading = false;
       this.chapters = chapters;
     });
     this.bookApi.fetchAudios(bookId).subscribe((audios) => {
       this.loading = false;
       this.audios = audios;
-    });
+    });*/
   }
 
   async ionViewDidEnter(): Promise<void> {

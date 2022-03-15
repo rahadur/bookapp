@@ -4,12 +4,13 @@ import {Book} from '../../../book/models/book';
 @Component({
   selector: 'app-book-card',
   template: `
-    <ion-card [routerLink]="href">
+    <ion-card >
       <ion-img [src]="book.thumbnail"></ion-img>
       <ion-card-content>
         <div class="card-title">
-          <h3 class="title">{{ book.title }}</h3>
-        </div>
+        <h4 class="title">{{ book.title | truncate:[18, '...'] }}</h4>
+        <p  *ngIf="book.author" class="author">{{ book.author.name | truncate:[22, '...']}}</p>
+      </div>
       </ion-card-content>
     </ion-card>
   `,
@@ -18,8 +19,6 @@ import {Book} from '../../../book/models/book';
 export class BookCardComponent implements OnInit {
 
   @Input() book: Book;
-
-  @Input() href: string;
 
   constructor() { }
 

@@ -7,6 +7,7 @@ import {AlertController} from '@ionic/angular';
 import {StorageService} from '@core/services/storage.service';
 import {Capacitor} from '@capacitor/core';
 import {AdService} from '@core/services/ad.service';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details',
@@ -18,6 +19,7 @@ export class DetailsPage implements OnInit {
   book: Book;
 
   constructor(
+    private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private router: Router,
     private alertCtrl: AlertController,
@@ -29,9 +31,11 @@ export class DetailsPage implements OnInit {
     this.bookInitialize();
   }
 
-  ngOnInit() {
-
+  get html(): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(this.book.description);
   }
+
+  ngOnInit() {}
 
   async ionViewDidEnter(): Promise<void> {
     await this.ad.showBanner();
