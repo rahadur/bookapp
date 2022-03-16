@@ -25,7 +25,9 @@
   </ion-refresher>
 
   <ion-grid>
-    <!--<ion-row *ngIf="!loading">
+    <!-- End Books -->
+    <ng-container *ngIf="!loading">
+      <!--<ion-row *ngIf="!loading">
       <ion-col size="4">
         <ion-img [src]="primaryBook.thumbnail"></ion-img>
       </ion-col>
@@ -37,42 +39,39 @@
       </ion-col>
     </ion-row>-->
 
-    <ion-row *ngIf="!loading" (click)="navigateTo(primaryBook)">
-      <ion-col size="6" offset="3">
-        <ion-img [src]="primaryBook.thumbnail"></ion-img>
-      </ion-col>
-      <ion-col size="12" class="ion-text-center primary-book-title">
-        <h3>{{ primaryBook.title }}</h3>
-        <h5> <span>by</span> {{ primaryBook.author.name }}</h5>
-      </ion-col>
-    </ion-row>
+      <ion-row (click)="navigateTo(primaryBook)">
+        <ion-col size="6" offset="3">
+          <ion-img [src]="primaryBook.thumbnail"></ion-img>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center primary-book-title">
+          <h3>{{ primaryBook.title }}</h3>
+          <h5> <span>by</span> {{ primaryBook.author.name }}</h5>
+        </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col class="section-header" size="6">
-        <h3>Related Books</h3>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ng-container *ngIf="!loading">
+      <ion-row>
+        <ion-col class="section-header" size="6">
+          <h3>Related Books</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col
-           *ngFor="let book of relatedBooks"
-           size="4" size-sm="3"
-           size-md="2" size-lg="1" >
+          *ngFor="let book of relatedBooks"
+          size="4" size-sm="3"
+          size-md="2" size-lg="1" >
           <app-book-card
             [book]="book"
             (click)="navigateTo(book)">
           </app-book-card>
         </ion-col>
-      </ng-container>
-    </ion-row>
+      </ion-row>
 
-    <ion-row>
-      <ion-col size="6" class="section-header">
-        <h3 >More Books</h3>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ng-container *ngIf="!loading">
+      <ion-row>
+        <ion-col size="6" class="section-header">
+          <h3 >More Books</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col
           *ngFor="let book of books"
           size="4" size-sm="3"
@@ -82,31 +81,57 @@
             (click)="navigateTo(book)">
           </app-book-card>
         </ion-col>
-      </ng-container>
-    </ion-row>
+      </ion-row>
+    </ng-container>
+    <!-- End Books -->
 
-    <ion-row>
-      <ng-container *ngIf="loading">
-        <ion-col size="6">
-          <ion-skeleton-text animated style="width: 100%; height: 244px;"></ion-skeleton-text>
+    <!-- Skeleton Placeholder -->
+    <ng-container *ngIf="loading">
+      <ion-row>
+        <ion-col size="6" offset="3">
+          <ion-skeleton-text animated style="width: 100%; height: 294px"></ion-skeleton-text>
         </ion-col>
-        <ion-col size="6">
-          <ion-skeleton-text animated style="width: 100%; height: 244px;"></ion-skeleton-text>
+        <ion-col size="12" class="ion-text-center primary-book-title">
+          <ion-skeleton-text animated style="height: 50px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="height: 20px;"></ion-skeleton-text>
         </ion-col>
-        <ion-col size="6">
-          <ion-skeleton-text animated style="width: 100%; height: 244px;"></ion-skeleton-text>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="section-header" size="6">
+          <h3>Related Books</h3>
         </ion-col>
-        <ion-col size="6">
-          <ion-skeleton-text animated style="width: 100%; height: 244px;"></ion-skeleton-text>
+      </ion-row>
+      <ion-row>
+        <ion-col
+          *ngFor="let skeleton of skeletons"
+          size="4" size-sm="3"
+          size-md="2" size-lg="1" >
+          <ion-skeleton-text
+            animated
+            class="book">
+          </ion-skeleton-text>
         </ion-col>
-        <ion-col size="6">
-          <ion-skeleton-text animated style="width: 100%; height: 244px;"></ion-skeleton-text>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6" class="section-header">
+          <h3 >More Books</h3>
         </ion-col>
-        <ion-col size="6">
-          <ion-skeleton-text animated style="width: 100%; height: 244px;"></ion-skeleton-text>
+      </ion-row>
+      <ion-row>
+        <ion-col
+          *ngFor="let skeleton of skeletons"
+          size="4" size-sm="3"
+          size-md="2" size-lg="1" >
+          <ion-skeleton-text
+            animated
+            class="book">
+          </ion-skeleton-text>
         </ion-col>
-      </ng-container>
-    </ion-row>
+      </ion-row>
+    </ng-container>
+    <!-- End Skeleton Placeholder -->
   </ion-grid>
 </ion-content>
 

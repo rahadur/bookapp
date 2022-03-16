@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {ActionSheetController, PopoverController} from '@ionic/angular';
 import {Capacitor} from '@capacitor/core';
 
-
 import {BookService} from '@core/services/book.service';
 import {NavigationService} from '@core/services/navigation.service';
 import {AdService} from '@core/services/ad.service';
@@ -11,6 +10,7 @@ import {AdService} from '@core/services/ad.service';
 import {StorageKey, StorageService} from '@core/services/storage.service';
 import {Book} from '@app/modules/book/models/book';
 import {MoreMenuComponent} from '@core/components/more-menu/more-menu.component';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +18,8 @@ import {MoreMenuComponent} from '@core/components/more-menu/more-menu.component'
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  skeletons = new Array(6);
 
   loading = true;
   primaryBook: Book;
@@ -37,14 +39,12 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     await this.fetchBooks();
+    console.log('onLine', navigator.onLine);
   }
 
-  doRefresh(event) {
-    console.log('Begin async operation');
-    this.bookService.fetchBooks().subscribe(((books: Book[]) => {
-      this.books = books;
-      event.target.complete();
-    }));
+  async doRefresh(event): Promise<void> {
+    await this.fetchBooks();
+    event.target.complete();
   }
 
   async navigateTo(book: Book): Promise<void> {
@@ -53,7 +53,6 @@ export class HomePage implements OnInit {
   }
 
   async showMoreMenu(ev: any): Promise<void> {
-    console.log('Show More');
     const popover = await this.popoverCtrl.create({
       component: MoreMenuComponent,
       cssClass: 'more-menu-popover popover-content',
@@ -64,45 +63,22 @@ export class HomePage implements OnInit {
     await popover.present();
   }
 
-  async presentActionSheet(): Promise<void> {
-    const actionSheet = await this.actionCtrl.create({
-      buttons: [{
-        text: 'Rate This App',
-        icon: 'star-half-outline',
-        handler: () => {
-          window.open('https://play.google.com/store/apps/details?id=app.xplatform.grevocabulary', '_blank');
-          console.log('Delete clicked');
-        }
-      }, {
-        text: 'Privacy Policy',
-        icon: 'lock-open-outline',
-        handler: () => {
-          this.router.navigate(['privacy-policy']);
-        }
-      }]
-    });
-
-    await actionSheet.present();
-  }
-
   private async fetchBooks(): Promise<void> {
     const appInfo = JSON.parse(localStorage.getItem('APP_INFO'));
 
-    const ids = appInfo.books.map((book) => book.book );
     const relatedBookIds = appInfo.related_books.map((book) => book.book );
+    const ids = appInfo.books.map((book) => book.book );
 
-    this.bookService.fetchBook(appInfo.book).subscribe((book: Book) => {
-      this.primaryBook = book;
-    });
+    const primaryBook = this.bookService.fetchBook(appInfo.book);
+    const relatedBooks = this.bookService.fetchBooksIds(relatedBookIds);
+    const moreBooks = this.bookService.fetchBooksIds(ids);
 
-    this.bookService.fetchBooksIds(relatedBookIds).subscribe((books) => {
-      this.loading = false;
-      this.relatedBooks = books;
-    });
-
-    this.bookService.fetchBooksIds(ids).subscribe((books) => {
-      this.loading = false;
-      this.books = books;
+    forkJoin([primaryBook, relatedBooks, moreBooks])
+      .subscribe(([pBook, rBooks, mBooks])  => {
+        this.primaryBook = pBook;
+        this.relatedBooks = rBooks;
+        this.books = mBooks;
+        this.loading = false;
     });
   }
 

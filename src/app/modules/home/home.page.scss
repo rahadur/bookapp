@@ -16,6 +16,7 @@ ion-content {
     ion-row {
       ion-col.primary-book-title {
         h3 {
+          font-size: 17px;
           margin: 8px 0;
         }
         h5 {
@@ -28,6 +29,7 @@ ion-content {
       }
       ion-col.section-header {
         margin-top: 10px;
+        padding-bottom: 16px;
         border-bottom: 1px solid #cccccc;
         h3 {
           margin: 10px 0 0;
@@ -35,6 +37,10 @@ ion-content {
         }
       }
     }
+  }
 
+  ion-skeleton-text.book {
+    border-radius: 6px;
+    height: 165px;
   }
 }
