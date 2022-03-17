@@ -56,14 +56,13 @@ ion-content {
     line-height: 26px;
     color: #515e70;
   }
+}
 
-  ion-footer {
-    ion-toolbar {
-      ion-button {
-        --padding-top: 200px;
-        padding: 200px !important;
-      }
+ion-footer {
+  ion-toolbar {
+    ion-button::part(native) {
+      font-size: 18px;
+      font-weight: bold;
     }
   }
-
 }

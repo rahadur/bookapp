@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Book} from '@app/modules/book/models/book';
 import {Chapter} from '@app/modules/book/models/chapter';
@@ -12,7 +12,7 @@ import {Content} from '@app/modules/book/models/content';
   templateUrl: './textbook.page.html',
   styleUrls: ['./textbook.page.scss'],
 })
-export class TextbookPage implements OnInit {
+export class TextbookPage implements OnInit, OnDestroy {
 
   loading = false;
   skeletons  =  Array(10).fill(1);
@@ -28,15 +28,18 @@ export class TextbookPage implements OnInit {
     private ad: AdService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     const { bookId } = this.route.snapshot.params;
     this.book = this.navigation.book;
     this.fetchData(bookId);
-  }
-
-  async ionViewDidEnter(): Promise<void> {
+    await this.ad.showBanner();
     await this.ad.loadInterstitial();
   }
+
+  async ngOnDestroy(): Promise<void> {
+    await this.ad.hideBanner();
+  }
+
 
   readChapter(chapter: Chapter) {
     this.navigation.content = { title: chapter.title, content: chapter.content };

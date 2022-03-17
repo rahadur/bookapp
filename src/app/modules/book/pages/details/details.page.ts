@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationService} from '@core/services/navigation.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Book} from '@app/modules/book/models/book';
@@ -14,7 +14,7 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
 })
-export class DetailsPage implements OnInit {
+export class DetailsPage implements OnInit, OnDestroy {
 
   book: Book;
 
@@ -35,15 +35,19 @@ export class DetailsPage implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(this.book.description);
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    await this.ad.hideBanner();
+  }
+
+  async ngOnDestroy() {
+    await this.ad.showBanner();
+  }
 
   async ionViewDidEnter(): Promise<void> {
-    await this.ad.showBanner();
 
     this.ad.onInterstitialLoad(async () => {
       await this.ad.showInterstitial();
     });
-
 
     this.ad.onRewardedLoad(async () => {
       await this.ad.showRewarded();

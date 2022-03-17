@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {PopoverController} from '@ionic/angular';
 import {ReaderSettingComponent} from '../../components/reader-setting/reader-setting.component';
 import {ReaderSettingService} from '../../services/reader-setting.service';
@@ -8,6 +8,7 @@ import {Content} from '@app/modules/book/models/content';
 import {ActivatedRoute} from '@angular/router';
 import {MoreMenuComponent} from '@core/components/more-menu/more-menu.component';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {AdService} from '@core/services/ad.service';
 
 @Component({
   selector: 'app-reader',
@@ -25,18 +26,20 @@ export class ReaderPage implements OnInit {
     private popoverCtrl: PopoverController,
     private readerSetting: ReaderSettingService,
     private navigation: NavigationService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private ad: AdService
   ) { }
 
-  ngOnInit() {
+  get html(): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(this.content.content);
+  }
+
+  async ngOnInit() {
     this.readerSetting.settings.subscribe((settings: ReaderSetting) => {
       this.settings = settings;
     });
     this.content = this.navigation.content;
-  }
-
-  get html(): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(this.content.content);
+    await this.ad.loadInterstitial();
   }
 
   async openReaderSetting(ev: any): Promise<void> {

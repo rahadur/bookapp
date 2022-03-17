@@ -29,7 +29,6 @@ export class AdService {
 
   }
 
-
   async showBanner(): Promise<void> {
     await this.banner.show();
   }

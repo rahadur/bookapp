@@ -8,4 +8,4 @@ export const CORE_SERVICES = [
   BookService,
   NavigationService,
   StorageService
-]
+];

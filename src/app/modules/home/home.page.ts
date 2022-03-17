@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ActionSheetController, PopoverController} from '@ionic/angular';
 import {Capacitor} from '@capacitor/core';
@@ -17,7 +17,7 @@ import {forkJoin} from 'rxjs';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
 
   skeletons = new Array(6);
 
@@ -39,7 +39,10 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     await this.fetchBooks();
-    console.log('onLine', navigator.onLine);
+  }
+
+  async ngAfterViewInit() {
+    await this.ad.showBanner();
   }
 
   async doRefresh(event): Promise<void> {
